@@ -5,7 +5,6 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "The New York Times",
   "author": "NYT",
   "url": "www.nytimes.com",
   "likes": 3

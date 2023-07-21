@@ -85,3 +85,37 @@ test('a blog without likes can be added', async () => {
     'Alo Moves'
   )
 });
+
+test('blog without title is not added', async () => {
+  const newBlog = {
+    author: 'Mary M',
+    url: 'www.test.com',
+    likes: 0
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+});
+
+test('blog without url is not added', async () => {
+  const newBlog = {
+    title: 'Mary Forever',
+    author: 'Mary M',
+    likes: 0
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+});
