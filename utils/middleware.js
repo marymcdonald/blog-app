@@ -21,13 +21,20 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).json({ error: error.message });
   } else if (error.message === 'password must be at least 3 characters long') {
     return response.status(400).json({ error: error.message});
+  } else if (error.name ===  'JsonWebTokenError') {
+    return response.status(400).json({ error: error.message });
   }
   
   next(error)
 }
 
+const tokenExtractor = () => {
+
+}
+
 module.exports = {
   requestLogger,
   unknownEndpoint,
-  errorHandler
+  errorHandler,
+  tokenExtractor
 }
